@@ -1,0 +1,22 @@
+.module_main_container{
+    overflow-y: auto;
+    width: 83%;
+    z-index: 5;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    /* border: 5px solid; */
+    margin-left: 17%;
+    background-color: rgba(0, 0, 0, 0.26);
+}
+.field_container{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 2rem;
+    gap:20px;
+    border-radius: 10px;
+}

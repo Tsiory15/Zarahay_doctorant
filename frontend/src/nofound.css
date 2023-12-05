@@ -1,0 +1,25 @@
+.connection_container{
+    gap:3rem;
+    flex-direction: column;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.log_btn{
+    font-weight: 500;
+    color:  #00471a;
+    white-space: nowrap;
+    width: 200px;
+    border-radius: 30px;
+    border: 3px solid  #00471a;
+    cursor: pointer;    
+    padding: 0.6rem 1rem;
+    /* background-color:#00471a; */
+    transition: 0.2s;
+}
+.log_btn:hover{
+    background-color:#fdb515;
+    color: #00471a;
+    transition: 0.2s;
+}

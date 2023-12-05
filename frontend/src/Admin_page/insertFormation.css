@@ -1,0 +1,67 @@
+.insert_formation_container{
+    margin-left: 17%;
+    padding: 1rem;
+}
+.modal_main_container{
+    background-color: rgba(0, 0, 0, 0.301);
+    position: fixed;
+    margin-left: 17%;
+    width: 83%;
+    height: 100vh;
+    /* border:1px solid; */
+    display: flex;
+    justify-content:center ;
+    align-items: center;
+}
+.add_formation{
+    cursor: pointer;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    bottom: 50px;
+    right: 35px;
+    position: fixed;
+    background-color: white;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 7px;
+}
+.modal_container{
+    background-color: white;
+    padding: 3%;
+    border-radius: 10px;
+    /* border: 1px solid; */
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#nom{
+    margin: 20px;
+    width: 100%;
+    padding: 1rem;
+}
+#desc{
+    padding: 1rem;
+}
+.close{
+    cursor: pointer;
+    align-self: flex-end;
+    font-size: 30px;
+    padding: 5px;
+}
+.post{
+    cursor: pointer;
+    width: 100%;
+    margin: 20px;
+    padding: 1rem;
+}
+.close:hover{
+    background-color: rgba(172, 172, 172, 0.445);
+    border-radius: 30px;
+}

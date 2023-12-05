@@ -1,0 +1,13 @@
+.admin_main_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid;
+    margin: 2%;
+    height: 89vh;
+}
+.admin_container{
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+}
