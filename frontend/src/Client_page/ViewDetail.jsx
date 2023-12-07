@@ -29,7 +29,9 @@ const ViewDetail = () => {
             <ReactPlayer className="videos" height={"auto"} width={"100%"} controls={true} url={'http://localhost:8081/videos/'+dataplay.videos}/>
             <h1>Titre</h1>
             <p>{dataplay.description_module}</p>
+            <p className='fichier'>Support</p>
             <a href={`http://localhost:8081/videos/${dataplay.pdf}`}>{dataplay.pdf}</a><br />
+            <p className='fichier'>Exercice</p>
             <a href={`http://localhost:8081/videos/${dataplay.ppt}`}>{dataplay.ppt}</a>
         </div>
         <div className='detail_container2'>

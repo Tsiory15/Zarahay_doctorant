@@ -1,0 +1,16 @@
+.discussion_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 30px;
+    right: 35px;
+    font-size: 30px;
+    color: white;
+    background-color: rgb(53, 117, 212);
+    width: fit-content;
+    height: fit-content;
+    padding: 0.8rem;
+    border-radius: 50%;
+    cursor: pointer;
+}

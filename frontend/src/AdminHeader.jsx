@@ -11,7 +11,7 @@ const AdminHeader = () => {
                         <li><Link to="/InsertFormation">Formation</Link></li>
                         <li><Link to="/module">Modules</Link></li>
                         <li><Link to="/Validation">Validation</Link></li>
-                        <li><Link>Discussion</Link></li>
+                        {/* <li><Link>Discussion</Link></li> */}
                     </ul>
                 </div>
         </div>

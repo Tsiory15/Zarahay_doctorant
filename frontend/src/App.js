@@ -20,12 +20,13 @@ import Test from './Test';
 import Validation from './Admin_page/Validation';
 // import VoirVideo from './VoirVideo';
 import Voirplus from './Client_page/Voirplus';
+import Discussion from './Discussion';
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/notFound" element={<NoFound/>}></Route>
-        <Route path="/" element={<div><Header/><Home/></div>}></Route>
+        <Route path="/" element={<div><Header/><Discussion/><Home/></div>}></Route>
         <Route path="/Create" element={<Create/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/Utilisateur" element={<div><AdminHeader/><Utilisateur/></div>}></Route>

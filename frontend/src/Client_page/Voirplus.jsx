@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import {useNavigate, useParams } from 'react-router-dom'
+import './voirplus.css'
 
 const Voirplus = () => {
   axios.defaults.withCredentials = true;
@@ -54,10 +55,14 @@ const Voirplus = () => {
   }
   return (
     <div>
-      <div>
-          {dataFormation.nom_formation}
-          {inscrit && <button onClick={inscription}>S'inscrire</button>}
-          {voir && <button onClick={() => viewdetail(dataFormation.id_formation)}>Apprendre</button>}
+      <div className='voir_main_container'>
+        <h1>{dataFormation.nom_formation}</h1>
+        <p>{dataFormation.description_formation}</p>
+        <div className='btn_container'>
+          {inscrit && <button className='inscription_btn' onClick={inscription}>S'inscrire</button>}
+          {voir && <button className='inscription_btn' onClick={() => viewdetail(dataFormation.id_formation)}>Apprendre</button>}
+          <button onClick={() => nav('/Formation')}>Retour</button>
+        </div>
       </div>
     </div>
   )

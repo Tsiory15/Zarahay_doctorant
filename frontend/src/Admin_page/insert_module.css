@@ -7,16 +7,23 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    /* border: 5px solid; */
     margin-left: 17%;
     background-color: rgba(0, 0, 0, 0.26);
 }
 .field_container{
+    overflow-y: auto;
     background-color: white;
     display: flex;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    padding: 2rem;
-    gap:20px;
+    padding:2rem;
+    gap:15px;
     border-radius: 10px;
+}
+.field_container p{
+    font-weight: 500;
+    margin: 0;
+}
+.field_container textarea{
+    padding: 0.5rem;
 }

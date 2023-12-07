@@ -26,20 +26,20 @@ const io = require('socket.io')(http, {
     }
 });
 
-io.on('connection', (socket) => {
-  console.log('Client connected on'+socket.id);
+// io.on('connection', (socket) => {
+//   console.log('Client connected on'+socket.id);
 
-  socket.on('disconnect', () => {
-    console.log('Client disconnected'+socket.id);
-  });
+//   socket.on('disconnect', () => {
+//     console.log('Client disconnected'+socket.id);
+//   });
 
-  socket.on('stream', (data) => {
-    io.emit('stream', data);
-  });
-});
-http.listen(3001, () => {
-  console.log(`Server is running on http://localhost:3001`);
-});
+//   socket.on('stream', (data) => {
+//     io.emit('stream', data);
+//   });
+// });
+// http.listen(3001, () => {
+//   console.log(`Server is running on http://localhost:3001`);
+// });
 
 
 
@@ -87,7 +87,8 @@ CREATE TABLE IF NOT EXISTS inscription (
     id_inscription INT PRIMARY KEY AUTO_INCREMENT,
     id_formation TEXT,
     nom TEXT,
-    status TEXT
+    status TEXT,
+    execution_time TIMESTAMP
 );`;
 db.query(createAdmin,err => {if(err){console.log(err)}})
 db.query(createFormation,err => {if(err){console.log(err)}})
@@ -141,6 +142,33 @@ app.post('/sendmessage',(req,res) => {
         return res.json(result);
     })
 })
+//Délai d'accès a une formation 
+const ms = require('ms')
+function execute(){ db.query('SELECT * FROM inscription',(error,result) => {
+    if(error)console.log(error)
+    const currentTime = new Date().getTime();
+    result.forEach((row) => {
+        const delai = ms(row.délai)
+        const executionTime = new Date(currentTime + delai);
+        if (!row.execution_time || executionTime > new Date(row.execution_time)) {
+        setTimeout(() => {
+            db.query('UPDATE inscription SET execution_time = ? WHERE id_inscription = ?', [executionTime, row.id_inscription], (error,result ) => {
+                if (error) console.log(error);
+                db.query('DELETE FROM inscription WHERE id_inscription = ?',[row.id_inscription],(err,res) => {
+                    if(err)console.log(err)
+                })
+              });
+        },delai)
+        }
+    })
+})}
+execute();
+setInterval(execute,ms('5s'));
+
+
+
+
+
 //Inscription
 app.post('/inscription',(req,res) => {
     const status = 'non'
@@ -157,6 +185,7 @@ app.get('/getinscrit',(req,res) => {
         return res.json(result);
     })
 })
+//Vérification inscription
 app.post('/checkinscrit',(req,res) => {
     const idFormation = req.body.id
     const status = 'non' 
@@ -170,6 +199,7 @@ app.post('/checkinscrit',(req,res) => {
         }
     })
 })
+//Vérification validation
 app.post('/getvalider',(req,res) => {
     const idFormation = req.body.id
     const status = 'oui' 
@@ -182,6 +212,7 @@ app.post('/getvalider',(req,res) => {
         }
     })
 })
+//Valider inscription
 app.post('/validate',(req,res) => {
     const status = 'oui'
     const sql = 'UPDATE inscription SET status = ? WHERE id_inscription = ?'
@@ -205,7 +236,7 @@ app.delete('/deleteinscription/:id',(req,res) => {
         return res.json({Message:"Deleted successfully"});
     })
 })
-
+//Ajout module
 app.post('/upload',upload.fields([{name:'video'},{name:'pdf'},{name:'ppt'}]),(req,res) => {
     const video = req.files['video'][0].filename;
     const pdf = req.files['pdf'][0].filename;
@@ -244,7 +275,7 @@ app.delete('/delete/:id',(req,res) => {
         return res.json(result);
     })
 })
-
+//Suppression formation
 app.delete('/delformation/:id',(req,res) => {
     const id = req.params.id
     const sql = "DELETE from formation WHERE id_formation = ?";
@@ -261,7 +292,7 @@ app.get('/getall',(req,res) => {
         return res.json(result);
     })
 })
-
+//Affichage des formations
 app.get('/getformation',(req,res) => {
     const sql = "SELECT * from formation";
     db.query(sql,(err,result) => {
@@ -269,7 +300,7 @@ app.get('/getformation',(req,res) => {
         return res.json(result);
     })
 })
-
+//Affichage des modules selon les formations selectionner
 app.post('/getmoduleformation/:id',(req,res) => {
     const sql ="SELECT * from module WHERE id_formation = ?";
     db.query(sql,req.params.id,(err,result) => {

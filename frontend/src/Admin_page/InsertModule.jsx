@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState,useEffect } from 'react'
 import "./insert_module.css"
 import { GrClose } from 'react-icons/gr'
+import Swal from 'sweetalert2'
 
 
 const InsertModule = ({closeModal}) => {
@@ -21,6 +22,14 @@ const InsertModule = ({closeModal}) => {
         setPpt(e.target.files[0])
     }
     const uploadfile = (e) => {
+    if(file === null || pdf === null || ppt === null || description === '' || selectedOption === ''){
+            Swal.fire({
+                text:"Veuillez remplir tous les champs",
+                timer:2000,
+                showConfirmButton:false,
+                position:"top"
+            })
+        }else{
         e.preventDefault();
         const formData = new FormData();
         formData.append('video',file);
@@ -37,7 +46,7 @@ const InsertModule = ({closeModal}) => {
             }
         })
         .catch(err => console.log(err))
-}
+}}
     const handleDropdownChange = (e) => {
         const selectedValue = e.target.value;
         setSelectedOption(selectedValue);
@@ -54,6 +63,7 @@ const InsertModule = ({closeModal}) => {
             <div className="field_container">
                 
                 <GrClose className='close' onClick={() => closeModal(false)}/>
+                <p>Formation</p>
                 <select value={selectedOption} onChange={handleDropdownChange}>
                     <option value="">Sélectionnez une formation</option>
                     {donnee.map(item => {
@@ -62,13 +72,15 @@ const InsertModule = ({closeModal}) => {
                         </option>
                     })}
                 </select>
+                <p>Videos</p>
                 <input type="file" id='vid' onChange={handleUpload}/>
-                {/* <label htmlFor="nom">Nom de la module</label>
-                <input type="text" id="nom" onChange={e => setNom(e.target.value)} /> */}
-                <textarea cols="30" rows="10" placeholder="Description de la formation" onChange={e => setDescription(e.target.value)}/>
+                <p>Description de la module</p>
+                <textarea cols="30" rows="7" placeholder="Veuillez saisir la description dans cette section" onChange={e => setDescription(e.target.value)}/>
+                <p>Support</p>
                 <input type="file" id="pdf" onChange={PdfUpload}/>
+                <p>Exercice</p>
                 <input type="file" id='ppt' onChange={pptUpload}/>
-                <button onClick={uploadfile}>Upload</button>
+                <button onClick={uploadfile}>Ajouter</button>
             </div>
             </div>
         </div>
