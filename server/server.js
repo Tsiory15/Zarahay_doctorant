@@ -144,7 +144,9 @@ app.post('/sendmessage',(req,res) => {
 })
 //Délai d'accès a une formation 
 const ms = require('ms')
-function execute(){ db.query('SELECT * FROM inscription',(error,result) => {
+function execute(){
+    const status = 'oui'
+    db.query('SELECT * FROM inscription WHERE status = ?',[status],(error,result) => {
     if(error)console.log(error)
     const currentTime = new Date().getTime();
     result.forEach((row) => {
@@ -369,7 +371,7 @@ app.post('/formation',(req,res) => {
 
 
 
-
+//Code de validation
 const crypto = require('crypto')
 const nodemailer = require('nodemailer')
 const code = crypto.randomBytes(4).toString('hex')

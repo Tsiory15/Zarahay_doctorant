@@ -13,4 +13,9 @@
     padding: 0.8rem;
     border-radius: 50%;
     cursor: pointer;
+    transition: 0.3s;
+}
+.discussion_btn:hover{
+    background-color: rgb(39, 84, 151);
+    transition: 0.3s;
 }
