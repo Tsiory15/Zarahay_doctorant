@@ -46,7 +46,8 @@ const Voirplus = () => {
   })
   //Inscription au cours
   const inscription = () => {
-    axios.post('http://localhost:8081/inscription',{id,name})
+    const expiration = dataFormation.expiration
+    axios.post('http://localhost:8081/inscription',{id,name,expiration})
     .then(res => {window.location.reload(true)})
     .catch(err => console.log(err))
   }

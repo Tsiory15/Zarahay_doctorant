@@ -8,6 +8,8 @@ const InsertFormation = () => {
   const [nom, setNom] = useState('')
   const [desc, setDesc] = useState('')
   const [open, setOpen] = useState(false)
+  const [delai,setDelai] = useState('')
+  const [unite,setUnite] = useState('')
   const showAlert = (id,idFormation) => {
     Swal.fire({
         title: 'Are you sure?',
@@ -37,8 +39,9 @@ const InsertFormation = () => {
 
   const add = (e) => {
     e.preventDefault()
+    const expiration = delai+unite
     try {
-      axios.post('http://localhost:8081/Formation', { nom, desc })
+      axios.post('http://localhost:8081/Formation', { nom, desc,expiration })
         .then(res => {console.log(res)
         window.location.reload(true)})
         .catch(err => console.log(err))
@@ -66,6 +69,15 @@ const InsertFormation = () => {
               value={nom}
               onChange={e => setNom(e.target.value)}
             />
+            <div className='expiration'>
+              <input type="number" id="nbr" onChange={e => setDelai(e.target.value)}/>
+              <select id="unite" onChange={e => setUnite(e.target.value)}>
+                <option value="d">Jour</option>
+                <option value="h">Heure</option>
+                <option value="m">Minute</option>
+                <option value="s">Seconde</option>
+              </select>
+            </div>
             <textarea
               name="desc"
               id="desc"

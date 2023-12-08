@@ -63,7 +63,8 @@ const createFormation =`
 CREATE TABLE IF NOT EXISTS formation (
     id_formation INT PRIMARY KEY AUTO_INCREMENT,
     nom_formation TEXT,
-    description_formation TEXT
+    description_formation TEXT,
+    expiration TEXT
 );`;
 const createModule=`
 CREATE TABLE IF NOT EXISTS module (
@@ -165,7 +166,7 @@ function execute(){
     })
 })}
 execute();
-setInterval(execute,ms('5s'));
+setInterval(execute,ms('1s'));
 
 
 
@@ -174,8 +175,8 @@ setInterval(execute,ms('5s'));
 //Inscription
 app.post('/inscription',(req,res) => {
     const status = 'non'
-    const sql = "INSERT INTO inscription SET id_formation = ?,nom = ?, status = ?";
-    db.query(sql,[req.body.id,req.body.name,status],(err,result) => {
+    const sql = "INSERT INTO inscription SET id_formation = ?,nom = ?, status = ?,délai = ?,execution_time = NOW()";
+    db.query(sql,[req.body.id,req.body.name,status,req.body.expiration],(err,result) => {
         if(err)res.json(err);
         return res.json(result);
     })
@@ -362,8 +363,8 @@ app.post('/logadmin',(req,res) => {
 })
 
 app.post('/formation',(req,res) => {
-    const sql = "INSERT INTO formation SET nom_formation = ?,description_formation = ?";
-    db.query(sql,[req.body.nom,req.body.desc],(err,result) => {
+    const sql = "INSERT INTO formation SET nom_formation = ?,description_formation = ?,expiration = ?";
+    db.query(sql,[req.body.nom,req.body.desc,req.body.expiration],(err,result) => {
         if(err)return res.json(err);
         return res.json(result)
     })
