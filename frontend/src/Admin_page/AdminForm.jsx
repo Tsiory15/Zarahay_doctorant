@@ -53,7 +53,7 @@ const AdminForm = () => {
                     onChange={e => setadminPass(e.target.value)}
                     />
                 <button className="admin_button">Submit</button>
-                <Link>Retour</Link>
+                <Link to={'/login'}>Retour</Link>
             </form>
             </div>
         </div>

@@ -17,29 +17,21 @@ app.use(cors(
         credentials:true
     }
 ))
-
-
+//Message
 const http = require('http').Server(app);
 const io = require('socket.io')(http, {
     cors: {
         origin: "http://localhost:3000"
     }
 });
+app.post('/sendmessage',(req,res) => {
+    const sql = "INSERT INTO message SET Nom = ?, contenu = ?";
+    db.query(sql,[req.body.nom,req.body.contenu],(err,result) => {
+        if(err)res.json(err);
+        return res.json(result);
+    })
+})
 
-// io.on('connection', (socket) => {
-//   console.log('Client connected on'+socket.id);
-
-//   socket.on('disconnect', () => {
-//     console.log('Client disconnected'+socket.id);
-//   });
-
-//   socket.on('stream', (data) => {
-//     io.emit('stream', data);
-//   });
-// });
-// http.listen(3001, () => {
-//   console.log(`Server is running on http://localhost:3001`);
-// });
 
 
 
@@ -119,30 +111,6 @@ app.post('/play/:id',(req,res) => {
     })
 })
 
-//Message
-app.get('/getmessage/:id',(req,res) => {
-    const sql="SELECT * FROM message WHERE Nom=?";
-    db.query(sql,req.params.id,(err,result) => {
-        if(err)res.json(err);
-        return res.json(result);
-    })
-})
-
-app.get('/getallmessage',(req,res) => {
-    const sql = "SELECT * FROM message";
-    db.query(sql,(err,result) => {
-        if(err)res.json(err);
-        return res.json(result);
-    })
-})
-
-app.post('/sendmessage',(req,res) => {
-    const sql = "INSERT INTO message SET Nom = ?, contenu = ?";
-    db.query(sql,[req.body.nom,req.body.contenu],(err,result) => {
-        if(err)res.json(err);
-        return res.json(result);
-    })
-})
 //Délai d'accès a une formation 
 const ms = require('ms')
 function execute(){
@@ -431,6 +399,6 @@ app.post('/user',(req,res) => {
         })
 
 const PORT = process.env.PORT
-app.listen(PORT,() => {
+http.listen(PORT,() => {
     console.log(`Listening on PORT ${PORT}`)
 })

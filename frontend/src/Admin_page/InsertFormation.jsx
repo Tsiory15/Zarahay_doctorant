@@ -81,7 +81,7 @@ const InsertFormation = () => {
             <textarea
               name="desc"
               id="desc"
-              cols="30"
+              cols="35"
               rows="10"
               placeholder='Description'
               value={desc}

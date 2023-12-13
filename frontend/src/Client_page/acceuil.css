@@ -1,3 +1,16 @@
+.admin_part_container{
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.admin_part_container a{
+    border-radius: 30px;
+    padding:1rem 2rem;
+    background-color: black;
+    color: white;
+    position: absolute;
+    bottom: 50px;
+}
 .login_global_container{
     display: flex;
     align-items: center;
@@ -56,9 +69,9 @@
 .sign,.adm{
     color: black;
 }
-.sign:hover,.adm:hover{
+/* .sign:hover,.adm:hover{
     color: #555;
-}
+} */
 .login_button:hover{
     background-color: rgb(27, 83, 187);
     color: white;

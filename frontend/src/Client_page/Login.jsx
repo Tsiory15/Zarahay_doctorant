@@ -44,8 +44,8 @@ const Login = () => {
             
             <div className='login_global_container'>
                 <div className="login_main_container">
-                <div>
-                {/* <Link className='adm' to="/AdminForm">Je suis un Administrateur</Link> */}
+                <div className='admin_part_container'>
+                <Link className='adm' to="/AdminForm">Je suis un Administrateur</Link>
                 </div>
                 <div>
                     <form onSubmit={onSubmit} className="login_container">
@@ -73,7 +73,7 @@ const Login = () => {
                         />
                     </div>
                     <button className="login_button">Connexion</button>
-                    <Link className='sign' to="/Create">Sign up?</Link>
+                    <Link className='sign' to="/Create">Créer un compte?</Link>
                 </form>
             </div>
             </div>

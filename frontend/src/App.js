@@ -13,14 +13,13 @@ import Formation from './Client_page/Formation';
 import InsertFormation from './Admin_page/InsertFormation';
 import ViewDetail from './Client_page/ViewDetail';
 import NoFound from './NoFound';
-// import Video from './Video';
 // import Test from './Admin_page/Test';
 import Chat from './Chat';
 import Test from './Test';
 import Validation from './Admin_page/Validation';
-// import VoirVideo from './VoirVideo';
 import Voirplus from './Client_page/Voirplus';
 import Discussion from './Discussion';
+
 function App() {
   return (
     <BrowserRouter>
@@ -37,8 +36,6 @@ function App() {
         <Route path="/InsertFormation" element={<div><AdminHeader/><InsertFormation/></div>}></Route>
         <Route path='/ViewDetail/:id' element={<div><Header/><ViewDetail/></div>}></Route>
         <Route path='/Voirplus/:id' element={<div><Header/><Voirplus/></div>}></Route>
-        {/* <Route path='/Live' element={<div><Video/></div>}></Route> */}
-        {/* <Route path='/Voir' element={<div><VoirVideo/></div>}></Route> */}
         <Route path='/test' element={<div><Chat/></div>}></Route>
         <Route path='/chat' element={<div><Test/></div>}></Route>
         <Route path='/Validation' element={<div><AdminHeader/><Validation/></div>}></Route>

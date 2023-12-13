@@ -4,13 +4,15 @@ import {FaBars} from 'react-icons/fa'
 import './header.css'
 import axios from 'axios'
 // import Cookies from 'js-cookie'
- // import {GrLogout} from 'react-icons/gr'
+import { TbLogout } from "react-icons/tb";
+import { LuUserCircle2 } from "react-icons/lu";
+import Swal from 'sweetalert2'
 // import {AiFillCaretDown} from 'react-icons/ai'
 
 const Header = () => {
     axios.defaults.withCredentials = true;
     const [show, setShow] = useState(true)
-    // const [name,setName] = useState('')
+    const [name,setName] = useState('')
     // const [message,setMessage] = useState('')
     const [auth,setAuth] = useState(false)
     const navigate = useNavigate();
@@ -18,6 +20,16 @@ const Header = () => {
         navigate('/login')
     }
     const handlelogout = () => {
+        Swal.fire({
+            title: 'Logout?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+        if (result.isConfirmed) {
      axios.get('http://localhost:8081/logout')
      .then(res => {
         if(res.data.Status === "Success")
@@ -28,7 +40,8 @@ const Header = () => {
         }
      })
      .catch(err => console.log(err))   
-    }
+        }}
+        )}
 
     
 
@@ -37,7 +50,7 @@ const Header = () => {
       .then(res => {
         if(res.data.Status === "Success"){
             setAuth(true)
-            // setName(res.data.name);
+            setName(res.data.name);
             // console.log(res.data.name)
         }else{
             // setMessage(res.data.Message);
@@ -52,24 +65,27 @@ const Header = () => {
                 <p>ZARAHAY<br/><span>Doctorant</span></p>
                 </div>
                 <div className="menu_main_container">
-                <FaBars className="menu_icons" onClick={() => setShow(!show)}></FaBars>
                     <ul className={show ? "hide":"show"}>
                         <li className="acceuil"><Link to="/">Acceuil</Link></li>
                         {auth ? <li className="formation"><Link to={"/Formation"}>Formation</Link></li> : <></>}
                         <li className="contact"><Link>Contact</Link></li>
                         <li><Link>FAQ</Link></li>
-                        {
-                            auth ? (<button onClick={handlelogout} className="log">Se déconnecter</button>) : 
+                    </ul>
+                </div>
+                <div className='logging_main_container'>
+                {
+                            auth ? (
+                            <>
+                            <LuUserCircle2 className='user_icon'/>
+                            <p className='connected_user'>{name}</p>
+                            <TbLogout onClick={handlelogout} className='logout' title='Se déconnecter?'/>
+                            </>
+                            ) : 
                             (
-                                <>
-                                {/* <li className='status'>
-                                    <Link className='nom'>{name}</Link>
-                                    <GrLogout className='logout'/></li> */}
-                                    <button onClick={handleclick} className="log">Se Connecter</button>
-                                    </>
+                                <button onClick={handleclick} className="log">Se Connecter</button>
                             )
                         }
-                    </ul>
+                        <FaBars className="menu_icons" onClick={() => setShow(!show)}></FaBars>
                 </div>
             </div>
         </div>

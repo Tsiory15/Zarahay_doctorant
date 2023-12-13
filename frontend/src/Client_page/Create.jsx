@@ -5,6 +5,9 @@ import {Link} from 'react-router-dom'
 import Swal from 'sweetalert2'
 
 const Create = () => {
+    const [isEmailFocused, setIsEmailFocused] = useState(false);
+    const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+    const [isNameFocused, setNameFocused] = useState(false);
     const [mail,setMail] = useState('')
     const [mdp,setMdp] = useState('')
     const [name,setName] = useState('')
@@ -84,22 +87,37 @@ const Create = () => {
                 <div className='create_main_container'>
                     <div>
                         <div className="create_container">
-                            <span>Sign up</span>
+                            <span>CREER UN COMPTE</span>
+                            <div className={`form-group ${isNameFocused || name ? 'focused' : ''}`}>
+                            <label>Nom d'utilisateur</label>
                             <input 
                                 type="text" 
                                 className="name_create" 
-                                placeholder="Name"
-                                onChange={e => setName(e.target.value)}/>
+                                onChange={e => setName(e.target.value)}
+                                onFocus={() => setNameFocused(true)}
+                                onBlur={() => setNameFocused(false)}
+                                />
+                            </div>
+                            <div className={`form-group ${isEmailFocused || mail ? 'focused' : ''}`}>
+                            <label>Adresse E-mail</label>
                             <input 
                                 type="email" 
                                 className="mail_create" 
-                                placeholder="E-mail"
-                                onChange={e => setMail(e.target.value)}/>
+                                onChange={e => setMail(e.target.value)}
+                                onFocus={() => setIsEmailFocused(true)}
+                                onBlur={() => setIsEmailFocused(false)}
+                                />
+                            </div>
+                            <div className={`form-group ${isPasswordFocused || mdp ? 'focused' : ''}`}>
+                            <label>Mot de passe</label>
                             <input 
                                 type="password" 
                                 className="pass_create" 
-                                placeholder="Password"
-                                onChange={e => setMdp(e.target.value)}/>
+                                onChange={e => setMdp(e.target.value)}
+                                onFocus={() => setIsPasswordFocused(true)}
+                                onBlur={() => setIsPasswordFocused(false)}
+                                />
+                            </div>
                                 <div>
                                     <input 
                                     type="text" 
@@ -109,7 +127,7 @@ const Create = () => {
                                     <button className='validation_btn' onClick={sendValidation}>Envoyer</button>
                                 </div>
                             <button onClick={onSubmitHandler} className="create_button">Submit</button>
-                            <Link to="/login">Sign in</Link>
+                            <Link to="/login">Se connecter</Link>
                         </div>
                     </div>
                     <div>

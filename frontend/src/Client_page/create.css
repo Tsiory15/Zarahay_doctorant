@@ -1,3 +1,6 @@
+.create_container span{
+    font-size: 30px;
+}
 .create_global_container{
     padding: 2rem;
     display: flex;
