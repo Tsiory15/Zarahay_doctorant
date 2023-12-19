@@ -1,3 +1,6 @@
+#contact{
+    height: 100vh;
+}
 .body1_container{
     display: flex;
     flex-direction: column;

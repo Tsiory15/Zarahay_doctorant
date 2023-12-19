@@ -1,13 +1,125 @@
-.admin_main_container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid;
-    margin: 2%;
+.body{
+     background-color: rgb(216, 216, 216); 
+}
+.image{
+    width: 19%;
+    height: 15%; 
+    margin-top: 15vh;
+}
+
+.tout{
+    border: 1px solid rgb(216, 216, 216);
+     margin-top: 2%;  
     height: 89vh;
+    width: 70vh;
+    margin-left: 70vh;
+    background-color: transparent;
+    border-radius: 50px;
+    box-shadow: 10px 10px 10px  rgba(0, 0, 0, 0.5),-10px -10px 20px rgba(0, 0, 0, 0.5);
+}
+.admin{
+    color:  rgb(172, 166, 166);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+}
+.admin_main_container{
+    display: flex;  
+    justify-content: center; 
+    align-items: center;  
+   
 }
 .admin_container{
     display: flex;
-    gap: 2rem;
-    flex-direction: column;
+    gap: 1.5rem;
+    flex-direction: column; 
+} 
+.mail_admin{
+    border-radius: 15px;
+    border: solid 1px gray ;
+    background-color: azure;
+    height: 3%;
+    width: 100%;
+}
+.pass_admin{
+    border-radius: 15px;
+    border: solid 1px gray ;
+    background-color: azure;
+    height: 3%;
+    width: 100%;
+}
+::placeholder{
+    font-size: 10px;
+}
+.admin_button{
+     background-color:  rgb(0, 196, 205);
+    border:none;
+    border-radius: 15px;
+    color: white;
+     height: 6vh; 
+     width: 20vh;
+     transition: background-color 1s;
+}
+.admin_button:hover{
+    background-color:rgb(0,175 , 232);
+    border:none; 
+}
+.retour{
+   border: none;
+   width: 4vh;
+   height: 4vh;
+}
+#retour{
+    border: none;
+    background-color: transparent;
+}
+@media only screen and (max-width: 800px) {
+    .tout {
+    margin: 5%;
+    }
+    .admin{
+        font-size: 15px;
+    }
+}
+@media only screen and (max-height: 350px) {
+    .admin{
+    font-size: 0.5rem;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+    }
+    .admin_container{
+            gap: 0.9rem;     
+    }
+    .mail_admin{
+        width: 70%;
+        height: 7vh;
+        margin-left: 10vh;
+    }
+    .pass_admin{
+        width: 70%;
+        height: 7vh;
+        margin-left: 10vh;
+    }
+    .admin_button{
+        font-size: 0.7rem;
+    }
+}
+.admin_main_container input{
+    padding:0.5rem 1rem;
+}
+#p{
+    font-size: 0.8rem;
+    display: none;
+    
+}
+#lien{
+    width: 4vh;
+}
+#lien:hover #p{
+    display: block;
+}
+.footer{
+    display: flex;
 }

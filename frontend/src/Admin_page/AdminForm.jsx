@@ -3,6 +3,8 @@ import axios from 'axios'
 import {useNavigate,Link} from 'react-router-dom'
 import Swal from 'sweetalert2'
 import './adminForm.css'
+import image from '../../src/user.png'
+import retour from '../../src/retour.png'
 const AdminForm = () => {
     const [adminMail,setadminMail] = useState('')
     const [adminPass,setadminPass] = useState('')
@@ -21,7 +23,7 @@ const AdminForm = () => {
         .then(res => {
             if(res.status === 200){
                 console.log(res.data)
-                navigate('/Dashboard');
+                navigate('/Utilisateur');
             }else{
                 Swal.fire({
                     title:"Mot de passe ou e-mail incorrect",
@@ -36,10 +38,14 @@ const AdminForm = () => {
         }
     }
     return (
-        <div>
-            <div className="admin_main_container">
-            <form onSubmit={onSubmit} className="admin_container">
-                <span>Connect as an Admin</span>
+        
+        <div className='body'>
+            <div className='tout'>
+            <center><img src={image} alt='' className='image'/></center>
+            
+            <div className="admin_main_container" >
+                <form onSubmit={onSubmit} className="admin_container">
+                <span className='admin'>Connect as an Admin</span>
                 <input 
                     type="email" 
                     className="mail_admin"
@@ -52,10 +58,16 @@ const AdminForm = () => {
                     placeholder="Password"
                     onChange={e => setadminPass(e.target.value)}
                     />
-                <button className="admin_button">Submit</button>
-                <Link to={'/login'}>Retour</Link>
+                <center><button className="admin_button">Submit</button></center>
+                <Link to={'/login'} id='lien'>
+                 <div className='footer'>
+                    <img src={retour} alt=""  className='retour'/>
+                    <p id='p'>retour</p>
+                 </div>
+                 </Link>
             </form>
             </div>
+        </div>
         </div>
     )
 }

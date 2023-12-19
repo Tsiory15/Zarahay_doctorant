@@ -1,5 +1,7 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Validation = () => {
     const [inscrit,setInscrit] = useState([])
@@ -14,6 +16,11 @@ const Validation = () => {
             window.location.reload(true)
             console.log(res)})
         .catch(err => console.log(err))
+    }
+    const admin_token = Cookies.get('admin_token')
+    const nav = useNavigate()
+    if(!admin_token){
+        nav('/pagenotfound')
     }
     return (
         <div>

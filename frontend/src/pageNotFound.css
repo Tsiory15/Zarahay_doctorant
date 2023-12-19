@@ -1,0 +1,21 @@
+.not_found_image{
+    height: 100vh;
+    width: 100%;
+    background: url('../public/243627-P43QII-478.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+.gotohome{
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    margin-top: 5%;
+    padding: 1rem;
+    border: none;
+    background-color: rgb(53, 53, 255);
+    border-radius: 30px;
+    height: fit-content;
+}

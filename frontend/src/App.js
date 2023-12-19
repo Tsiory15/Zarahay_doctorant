@@ -13,19 +13,17 @@ import Formation from './Client_page/Formation';
 import InsertFormation from './Admin_page/InsertFormation';
 import ViewDetail from './Client_page/ViewDetail';
 import NoFound from './NoFound';
-// import Test from './Admin_page/Test';
 import Chat from './Chat';
-import Test from './Test';
 import Validation from './Admin_page/Validation';
 import Voirplus from './Client_page/Voirplus';
-import Discussion from './Discussion';
+import PagenotFound from './PagenotFound';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/notFound" element={<NoFound/>}></Route>
-        <Route path="/" element={<div><Header/><Discussion/><Home/></div>}></Route>
+        <Route path="/" element={<div><Header/><Home/></div>}></Route>
         <Route path="/Create" element={<Create/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/Utilisateur" element={<div><AdminHeader/><Utilisateur/></div>}></Route>
@@ -36,8 +34,8 @@ function App() {
         <Route path="/InsertFormation" element={<div><AdminHeader/><InsertFormation/></div>}></Route>
         <Route path='/ViewDetail/:id' element={<div><Header/><ViewDetail/></div>}></Route>
         <Route path='/Voirplus/:id' element={<div><Header/><Voirplus/></div>}></Route>
-        <Route path='/test' element={<div><Chat/></div>}></Route>
-        <Route path='/chat' element={<div><Test/></div>}></Route>
+        <Route path='/chat' element={<div><Chat/></div>}></Route>
+        <Route path='/pagenotfound' element={<div><PagenotFound/></div>}></Route>
         <Route path='/Validation' element={<div><AdminHeader/><Validation/></div>}></Route>
       </Routes>
     </BrowserRouter>

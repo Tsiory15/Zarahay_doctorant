@@ -17,27 +17,6 @@ app.use(cors(
         credentials:true
     }
 ))
-//Message
-const http = require('http').Server(app);
-const io = require('socket.io')(http, {
-    cors: {
-        origin: "http://localhost:3000"
-    }
-});
-app.post('/sendmessage',(req,res) => {
-    const sql = "INSERT INTO message SET Nom = ?, contenu = ?";
-    db.query(sql,[req.body.nom,req.body.contenu],(err,result) => {
-        if(err)res.json(err);
-        return res.json(result);
-    })
-})
-
-
-
-
-
-
-
 const db = mysql.createConnection({
     host:process.env.HOST,  
     user:process.env.DB_USER,
@@ -90,7 +69,7 @@ db.query(createUser,err => {if(err){console.log(err)}})
 db.query(createInscription,err => {if(err)console.log(err)})
 
 
-//Image
+//Fichier
 app.use('/videos', express.static(path.join(__dirname, 'videos')));
 const storage = multer.diskStorage({
     destination:(req,file,cb) => {
@@ -317,13 +296,20 @@ app.get('/logout',(req,res) => {
     res.clearCookie('token');
     return res.json({Status:"Success"})
 })
+app.get('/logoutasanadmin',(req,res) => {
+    res.clearCookie('admin_token');
+    return res.json({Status:"Success"})
+})
 
 app.post('/logadmin',(req,res) => {
     const sql = "SELECT * from admin WHERE admin_mail = ? and admin_mdp = ?";
     db.query(sql,[req.body.adminMail,req.body.adminPass],(err,result) => {
         if(err)res.json({Message:"Task failed successfully"});
         if(result.length > 0 ){
-            return res.status(200).json(result);
+            const admin_name = result[0].admin_id
+            const admin_token = jwt.sign({admin_name},"admin_secret_key",{expiresIn:'1y'});
+            res.cookie('admin_token',admin_token)
+            return res.status(200).json(result)
         }else{
             return res.status(201).json(result);
         }
@@ -399,6 +385,6 @@ app.post('/user',(req,res) => {
         })
 
 const PORT = process.env.PORT
-http.listen(PORT,() => {
+app.listen(PORT,() => {
     console.log(`Listening on PORT ${PORT}`)
 })

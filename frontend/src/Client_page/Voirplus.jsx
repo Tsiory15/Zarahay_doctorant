@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {useNavigate, useParams } from 'react-router-dom'
 import './voirplus.css'
 import Swal from 'sweetalert2'
+import {MoonLoader} from 'react-spinners'
 
 const Voirplus = () => {
   axios.defaults.withCredentials = true;
@@ -12,6 +13,7 @@ const Voirplus = () => {
   const [name,setName] = useState('')
   const [inscrit,setInscrit] = useState(true)
   const [voir,setVoir] = useState(false)
+  const [load,setLoad] = useState(true)
   //Vérification inscription
   useEffect(() => {
     axios.get('http://localhost:8081/auth')
@@ -25,6 +27,7 @@ const Voirplus = () => {
       .catch(err => console.log(err))
     axios.post('http://localhost:8081/checkinscrit',{id,name})
     .then(res => {
+      setTimeout(() => {setLoad(false)},1000)
       if(res.status === 201)
       setInscrit(false)
     })
@@ -42,7 +45,8 @@ const Voirplus = () => {
     .then(res => {
       if(res.status === 201){
         setInscrit(false)
-      setVoir(true)}else{}})
+        setVoir(true)
+    }else{}})
     .catch(err => console.log(err))
   })
   //Inscription au cours
@@ -73,6 +77,13 @@ const Voirplus = () => {
   const viewdetail = (identifiant) => {
     nav('/ViewDetail/'+identifiant)
   }
+  if(load){
+    return <div> 
+     <div className="load_more">
+        <MoonLoader size={50}/>
+     </div>
+     </div>
+ }
   return (
     <div>
       <div className='voir_main_container'>

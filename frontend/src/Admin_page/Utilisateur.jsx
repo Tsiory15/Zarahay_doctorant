@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import "./utilisateur.css"
 import Swal from 'sweetalert2';
 import {MoonLoader} from 'react-spinners'
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Utilisateur = () => {
     const [data,setData] = useState([])
@@ -32,13 +34,16 @@ const Utilisateur = () => {
     useEffect(() => {
         axios.get('http://localhost:8081/getall')
         .then(res => {
-            setTimeout(() => {
-                setLoad(false)
-            },2000)
             setData(res.data)
+            setLoad(false)
         })
         .catch(err => console.log(err))
     }, [])
+    const admin_token = Cookies.get('admin_token')
+    const nav = useNavigate()
+    if(!admin_token){
+        nav('/pagenotfound')
+    }
     if(load){
        return <div> 
         <div className="loading">

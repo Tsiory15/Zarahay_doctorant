@@ -25,6 +25,7 @@
     padding:1rem;
 }
 .inserer_module{
+    color: white;
     cursor: pointer;
     z-index: 3;
     display: flex;

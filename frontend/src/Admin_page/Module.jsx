@@ -1,12 +1,12 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import './module.css'
-// import {Link} from "react-router-dom"
 import {MoonLoader} from "react-spinners"
 import Swal from 'sweetalert2'  
 import ReactPlayer from 'react-player'
 import InsertModule from './InsertModule'
-// import InsertModule from './InsertModule'
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 
 const Module = () => {
     const [load,setLoad] = useState(true)
@@ -15,8 +15,8 @@ const Module = () => {
     useEffect(() => {
         axios.get('http://localhost:8081/getmodule')
         .then(res => {
-            setTimeout(() => setLoad(false),2000)
             setData_module(res.data)
+            setLoad(false)
         })
         .catch(err => console.log(err))
     }, [])
@@ -42,6 +42,11 @@ const Module = () => {
             }
         )}
         })
+    }
+    const admin_token = Cookies.get('admin_token')
+    const nav = useNavigate()
+    if(!admin_token){
+        nav('/pagenotfound')
     }
     if(load){
         return <div className="loading_page"><MoonLoader size={50}/></div>
