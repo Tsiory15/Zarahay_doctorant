@@ -4,7 +4,7 @@ import "./utilisateur.css"
 import Swal from 'sweetalert2';
 import {MoonLoader} from 'react-spinners'
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import PagenotFound from '../PagenotFound'
 
 const Utilisateur = () => {
     const [data,setData] = useState([])
@@ -40,9 +40,9 @@ const Utilisateur = () => {
         .catch(err => console.log(err))
     }, [])
     const admin_token = Cookies.get('admin_token')
-    const nav = useNavigate()
     if(!admin_token){
-        nav('/pagenotfound')
+        // nav('/pagenotfound')
+        return <PagenotFound/>
     }
     if(load){
        return <div> 
@@ -54,6 +54,7 @@ const Utilisateur = () => {
     return (
         <div>
             <div className="table_container">
+                <h1>Listes des utilisateurs</h1>
             <table className="table">
                 <thead>
                     <tr className="thead">

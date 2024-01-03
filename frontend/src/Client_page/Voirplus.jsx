@@ -4,6 +4,8 @@ import {useNavigate, useParams } from 'react-router-dom'
 import './voirplus.css'
 import Swal from 'sweetalert2'
 import {MoonLoader} from 'react-spinners'
+import Cookies from 'js-cookie'
+import NoFound from '../NoFound'
 
 const Voirplus = () => {
   axios.defaults.withCredentials = true;
@@ -77,6 +79,12 @@ const Voirplus = () => {
   const viewdetail = (identifiant) => {
     nav('/ViewDetail/'+identifiant)
   }
+  const token = Cookies.get('token')
+    if(!token){
+        return (
+            <NoFound/>
+        )
+    }
   if(load){
     return <div> 
      <div className="load_more">

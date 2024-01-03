@@ -29,9 +29,15 @@ const Formation = () => {
             <div className='formation_main_container'>
                 {
                     donnee.map(value => {
-                            return (<div key={value.id_formation} className='card'>
-                                <h2>{value.nom_formation}</h2>
-                                <button onClick={() => view(value.nom_formation)} className='voir_btn'>En savoir plus...</button>
+                            return (<div key={value.id_formation} className='card' onClick={() => view(value.nom_formation)}>
+                                <div className='inside_card'>
+                                    <div className='image_formation'></div>
+                                <div>
+                                    <h2>{value.nom_formation}</h2>
+                                    <p>{value.description_formation}</p>
+                                </div>
+                                </div>
+                                {/* <button onClick={() => view(value.nom_formation)} className='voir_btn'>En savoir plus...</button> */}
                             </div>)
                         }
                     )

@@ -1,14 +1,36 @@
 .formation_main_container{
     display: flex;
     flex-wrap: wrap;
+    background-color: rgb(224, 224, 224);
+}
+.inside_card{
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 1rem;
+  height: 100%;
+  position: relative;
+}
+.image_formation{
+  width: 100%;
+  /* height: max-content; */
+  background: url('../../public/pexels-andrew-neel-2312369.jpg');
+  background-size: cover;
 }
 .card{
     position: relative;
-    box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 15px;
-    width: 310px;
-    height: 350px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 2px 2px;
+    width: 100%;
+    height: 200px;
     padding: 1rem;
-    margin: 1%;
+    margin: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: rgb(248, 248, 248);
+    transition: 0.2s;
+}
+.card:hover{
+  background-color: white;
+  transition: 0.2s;
 }
 .voir_btn{
   position: absolute;

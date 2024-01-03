@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom'
 import './viewdetail.css'
 import ReactPlayer from 'react-player'
 import {FaCaretRight} from 'react-icons/fa'
+import Discussion from '../Discussion'
+import Cookies from 'js-cookie'
+import NoFound from '../NoFound'
 
 const ViewDetail = () => {
     const {id} = useParams()
@@ -21,8 +24,15 @@ const ViewDetail = () => {
         .then(res => setDataplay(res.data[0]))
         .catch(err => console.log(err))
     }
+    const token = Cookies.get('token')
+    if(!token){
+        return (
+            <NoFound/>
+        )
+    }
   return (
     <div>
+        <Discussion/>
         <div className='detail_main_container'>
         <div className='detail_container1'>
             {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis totam voluptates odio, repudiandae aliquam omnis. Cum qui sint corrupti dolorem, quasi, omnis hic tenetur similique iusto natus eaque, culpa totam?</p> */}

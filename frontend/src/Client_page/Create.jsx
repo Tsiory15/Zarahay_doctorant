@@ -130,8 +130,9 @@ const Create = () => {
                             <Link to="/login">Se connecter</Link>
                         </div>
                     </div>
-                    <div>
-
+                    <div className='bg_image_container'>
+                        <div className='bg_image'>
+                        </div>
                     </div>
             </div>
             </div>

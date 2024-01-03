@@ -1,13 +1,13 @@
 .module_main_container{
     overflow-y: auto;
-    width: 83%;
+    width: 85%;
     z-index: 5;
     position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    margin-left: 17%;
+    margin-left: 15%;
     background-color: rgba(0, 0, 0, 0.26);
 }
 .field_container{

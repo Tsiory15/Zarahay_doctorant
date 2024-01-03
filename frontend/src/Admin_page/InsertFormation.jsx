@@ -4,7 +4,7 @@ import './insertFormation.css'
 import { GrClose } from 'react-icons/gr'
 import Swal from 'sweetalert2'
 import Cookies from 'js-cookie'
-import { useNavigate } from 'react-router-dom'
+import PagenotFound from '../PagenotFound'
 
 const InsertFormation = () => {
   const [nom, setNom] = useState('')
@@ -57,9 +57,8 @@ const InsertFormation = () => {
         .catch(err => console.log(err))
     })
     const admin_token = Cookies.get('admin_token')
-    const nav = useNavigate()
     if(!admin_token){
-        nav('/pagenotfound')
+      return <PagenotFound/>
     }
   return (
     <div>
@@ -97,6 +96,7 @@ const InsertFormation = () => {
         </div>
       )}
       <div className='insert_formation_container'>
+      <h1>Listes des Formations</h1>
         <div className='add_formation' onClick={() => setOpen(true)}>Ajouter</div>
         <div>
       <table className="table">

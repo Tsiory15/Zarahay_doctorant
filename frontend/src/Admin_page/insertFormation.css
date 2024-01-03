@@ -1,13 +1,14 @@
 .insert_formation_container{
-    margin-left: 17%;
+    margin-left: 15%;
     padding: 1rem;
 }
 .modal_main_container{
     background-color: rgba(0, 0, 0, 0.301);
     position: fixed;
-    margin-left: 17%;
-    width: 83%;
+    margin-left: 15%;
+    width: 85%;
     height: 100vh;
+    z-index: 5;
     /* border:1px solid; */
     display: flex;
     justify-content:center ;
@@ -50,6 +51,9 @@
 #desc{
     padding: 1rem;
 }
+::placeholder{
+    font-size: 15px;
+}
 .close{
     cursor: pointer;
     align-self: flex-end;
@@ -64,4 +68,9 @@
 .close:hover{
     background-color: rgba(172, 172, 172, 0.445);
     border-radius: 30px;
+}
+.expiration{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
 }

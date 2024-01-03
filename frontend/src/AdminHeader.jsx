@@ -13,14 +13,18 @@ const AdminHeader = () => {
     return (
         <div>
             <div className="admin_menu">
+                <div className='profile_container'>
+                    <LuUserCircle2 className='deco_admin'/>
+                </div>
                     <ul className="list_menu">
-                        <li><LuUserCircle2 className='user_icon'/></li>
                         <li><Link to="/Utilisateur">Utilisateur</Link></li>
                         <li><Link to="/InsertFormation">Formation</Link></li>
                         <li><Link to="/module">Modules</Link></li>
                         <li><Link to="/Validation">Validation</Link></li>
                         <li><Link to='https://explore.zoom.us/fr/products/meetings/'>Discussion</Link></li>
-                        <li><button className='logout_admin' onClick={logout}>Deconnection</button></li>
+                        <li><div className='logout_admin_container'>
+                        <button className='logout_admin' onClick={logout}>Deconnection</button>
+                            </div></li>
                     </ul>
                 </div>
         </div>

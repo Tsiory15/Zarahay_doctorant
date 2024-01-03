@@ -45,7 +45,9 @@ const Login = () => {
             <div className='login_global_container'>
                 <div className="login_main_container">
                 <div className='admin_part_container'>
-                <Link className='adm' to="/AdminForm">Je suis un Administrateur</Link>
+                    <div className='background_image'>
+                <Link className='adm' to="/AdminForm">Se connecter en tant qu'Administrateur</Link>
+                    </div>
                 </div>
                 <div>
                     <form onSubmit={onSubmit} className="login_container">

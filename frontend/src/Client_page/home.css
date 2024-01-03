@@ -18,6 +18,10 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+.body2{
+    width: 100%;
+    padding: 2rem;
+}
 .content{
     color: white;
     display: flex;

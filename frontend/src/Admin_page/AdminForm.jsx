@@ -13,7 +13,7 @@ const AdminForm = () => {
         e.preventDefault();
         if(adminMail.length === 0 || adminPass.length === 0){
             Swal.fire({
-                title:"Veuillez remplir tous les champs",
+                text:"Veuillez remplir tous les champs",
                 timer:2000,
                 showConfirmButton:false,
                 position:"top"
@@ -26,7 +26,7 @@ const AdminForm = () => {
                 navigate('/Utilisateur');
             }else{
                 Swal.fire({
-                    title:"Mot de passe ou e-mail incorrect",
+                    text:"Mot de passe ou e-mail incorrect",
                     timer:2000,
                     showConfirmButton:false,
                     position:"top"

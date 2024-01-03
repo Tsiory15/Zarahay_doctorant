@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import ReactPlayer from 'react-player'
 import InsertModule from './InsertModule'
 import Cookies from 'js-cookie'
-import { useNavigate } from 'react-router-dom'
+import PagenotFound from '../PagenotFound'
 
 const Module = () => {
     const [load,setLoad] = useState(true)
@@ -44,9 +44,8 @@ const Module = () => {
         })
     }
     const admin_token = Cookies.get('admin_token')
-    const nav = useNavigate()
     if(!admin_token){
-        nav('/pagenotfound')
+        return <PagenotFound/>
     }
     if(load){
         return <div className="loading_page"><MoonLoader size={50}/></div>
@@ -56,6 +55,7 @@ const Module = () => {
             {show && <InsertModule closeModal={setShow}/>}
             {/* <InsertModule/> */}
         <div className="module_page_container">
+            <h1>Liste des modules</h1>
         <div className="inserer_module" onClick={() => setShow(true)}><span>Ajouter</span></div>
             <div className="div_module">
             {data_module.map((value,index) => {

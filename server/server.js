@@ -129,8 +129,9 @@ app.post('/inscription',(req,res) => {
     })
 })
 app.get('/getinscrit',(req,res) => {
-    const sql = "SELECT * FROM inscription";
-    db.query(sql,(err,result) => {
+    const status = 'non'
+    const sql = "SELECT * FROM inscription WHERE status = ?";
+    db.query(sql,[status],(err,result) => {
         if(err)res.json(err);
         return res.json(result);
     })
