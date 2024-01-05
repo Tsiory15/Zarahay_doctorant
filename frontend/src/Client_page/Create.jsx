@@ -50,7 +50,7 @@ const Create = () => {
                 console.log(res)
                 Swal.fire({
                     toast:true,
-                    title:"Account creating successfully failed",
+                    title:"Compte créer avec succès",
                     showConfirmButton:false,
                     timer:2000,
                     position:"top"

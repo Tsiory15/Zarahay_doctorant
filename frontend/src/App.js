@@ -17,10 +17,13 @@ import Chat from './Chat';
 import Validation from './Admin_page/Validation';
 import Voirplus from './Client_page/Voirplus';
 import PagenotFound from './PagenotFound';
+import Forgotpass from './Client_page/Forgotpass';
+import SwitchPage from './SwitchPage';
 
 function App() {
   return (
     <BrowserRouter>
+    <SwitchPage></SwitchPage>
       <Routes>
         <Route path="/notFound" element={<NoFound/>}></Route>
         <Route path="/" element={<div><Header/><Home/></div>}></Route>
@@ -36,6 +39,7 @@ function App() {
         <Route path='/Voirplus/:id' element={<div><Header/><Voirplus/></div>}></Route>
         <Route path='/chat' element={<div><Chat/></div>}></Route>
         <Route path='/pagenotfound' element={<div><PagenotFound/></div>}></Route>
+        <Route path='/ForgotPassword' element={<div><Forgotpass/></div>}></Route>
         <Route path='/Validation' element={<div><AdminHeader/><Validation/></div>}></Route>
       </Routes>
     </BrowserRouter>

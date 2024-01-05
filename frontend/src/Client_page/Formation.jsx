@@ -19,7 +19,8 @@ const Formation = () => {
     const view = (id) => {
         nav('/Voirplus/'+id)
     }
-    if(!token){
+    const admin = Cookies.get('admin_token')
+    if(!token && !admin){
         return (
             <NoFound/>
         )

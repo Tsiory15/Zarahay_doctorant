@@ -62,6 +62,7 @@ CREATE TABLE IF NOT EXISTS inscription (
     status TEXT,
     execution_time TIMESTAMP
 );`;
+
 db.query(createAdmin,err => {if(err){console.log(err)}})
 db.query(createFormation,err => {if(err){console.log(err)}})
 db.query(createModule,err => {if(err){console.log(err)}})
@@ -316,7 +317,7 @@ app.post('/logadmin',(req,res) => {
         }
     })
 })
-
+//Insertion de formation 
 app.post('/formation',(req,res) => {
     const sql = "INSERT INTO formation SET nom_formation = ?,description_formation = ?,expiration = ?";
     db.query(sql,[req.body.nom,req.body.desc,req.body.expiration],(err,result) => {
@@ -357,8 +358,28 @@ app.post('/sendValidation',(req,res) => {
         }
     })
 })
-
-
+//Mot de passe oublié
+//Vérification existance adresse mail dans la base de données
+app.post('/forgotpassword',(req,res) => {
+    const check = 'SELECT * FROM user WHERE mail = ?'
+    db.query(check,[req.body.mail],(err,result) => {
+        if(err)return res.json(err);
+        if(result.length > 0 && codeValidation === req.body.validation){
+            return res.status(201).json(result)
+        }else{
+            return res.status(202).json(result)
+        }
+    })
+})
+//Réinitialisation de la mot de passe
+app.post('/resetpassword',(req,res) => {
+    const sql = 'UPDATE mdp FROM user WHERE mail = ?'
+    db.query(sql,[req.body.mail],(err,resutl) => {
+        if(err)return res.json(err);
+        return res.json(resutl);
+    })
+})
+//Création d'un compte
 app.post('/user',(req,res) => {
     const sql = "INSERT INTO user SET nom = ?, mail = ?, mdp = ?, date_creation = ?";
     const check = "SELECT * from user WHERE mail = ? ";

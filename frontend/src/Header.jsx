@@ -3,7 +3,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import {FaBars} from 'react-icons/fa'
 import './header.css'
 import axios from 'axios'
-// import Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 import { TbLogout } from "react-icons/tb";
 import { LuUserCircle2 } from "react-icons/lu";
 import Swal from 'sweetalert2'
@@ -11,6 +11,7 @@ import Swal from 'sweetalert2'
 
 const Header = () => {
     axios.defaults.withCredentials = true;
+    const admin = Cookies.get('admin_token')
     const [show, setShow] = useState(true)
     const [name,setName] = useState('')
     // const [message,setMessage] = useState('')
@@ -53,6 +54,7 @@ const Header = () => {
             setName(res.data.name);
             // console.log(res.data.name)
         }else{
+            setName('Admin')
             // setMessage(res.data.Message);
         }
       })
@@ -68,17 +70,20 @@ const Header = () => {
                     <ul className={show ? "hide":"show"}>
                         <li className="acceuil"><Link to="/">Acceuil</Link></li>
                         {auth ? <li className="formation"><Link to={"/Formation"}>Formation</Link></li> : <></>}
+                        {admin ? <li className="formation"><Link to={"/Formation"}>Formation</Link></li> : <></>}
                         <li className="contact"><Link>Contact</Link></li>
                         <li><Link>FAQ</Link></li>
                     </ul>
                 </div>
                 <div className='logging_main_container'>
                 {
-                            auth ? (
+                            auth || admin ? (
                             <>
                             <LuUserCircle2 className='user_icon'/>
                             <p className='connected_user'>{name}</p>
-                            <TbLogout onClick={handlelogout} className='logout' title='Se déconnecter?'/>
+                            {admin ? <></> :
+                                <TbLogout onClick={handlelogout} className='logout' title='Se déconnecter?'/>
+                            }
                             </>
                             ) : 
                             (

@@ -46,10 +46,10 @@ const Login = () => {
                 <div className="login_main_container">
                 <div className='admin_part_container'>
                     <div className='background_image'>
-                <Link className='adm' to="/AdminForm">Se connecter en tant qu'Administrateur</Link>
+                <Link className='adm' to="/AdminForm">Administrateur</Link>
                     </div>
                 </div>
-                <div>
+                <div className='container_login_container'>
                     <form onSubmit={onSubmit} className="login_container">
                     <h1>SE CONNECTER</h1>
                     <div className={`form-group ${isEmailFocused || email ? 'focused' : ''}`}>
@@ -74,6 +74,7 @@ const Login = () => {
                         onBlur={() => setIsPasswordFocused(false)}
                         />
                     </div>
+                    <Link to='/ForgotPassword' className='forgotpsw'>Mot de pass oublié ?</Link>
                     <button className="login_button">Connexion</button>
                     <Link className='sign' to="/Create">Créer un compte?</Link>
                 </form>

@@ -80,7 +80,8 @@ const Voirplus = () => {
     nav('/ViewDetail/'+identifiant)
   }
   const token = Cookies.get('token')
-    if(!token){
+  const admin = Cookies.get('admin_token')
+    if(!token && !admin){
         return (
             <NoFound/>
         )
@@ -99,8 +100,15 @@ const Voirplus = () => {
         <h1>{dataFormation.nom_formation}</h1>
         <p>{dataFormation.description_formation}</p>
         <div className='btn_container'>
-        {inscrit && <button className='inscription_btn' onClick={inscription}>S'inscrire</button>}
-          {voir && <button className='inscription_btn' onClick={() => viewdetail(dataFormation.id_formation)}>Apprendre</button>}
+          {!admin ?
+          <> 
+          {inscrit && <button className='inscription_btn' onClick={inscription}>S'inscrire</button>}
+          {voir && <button className='inscription_btn' onClick={() => viewdetail(dataFormation.id_formation)}>Accéder au contenu</button>}
+            </> : 
+            <> 
+            <button className='inscription_btn' onClick={() => viewdetail(dataFormation.id_formation)}>Accéder au contenu</button>
+            </>
+          }
           <button className='back_btn' onClick={() => nav('/Formation')}>Retour</button>
         </div>
       </div>
