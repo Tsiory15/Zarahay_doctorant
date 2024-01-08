@@ -63,7 +63,7 @@ const Voirplus = () => {
       confirmButtonText: 'Yes!'
   }).then((result) => {
   if (result.isConfirmed) {
-    const expiration = dataFormation.expiration
+    const expiration = dataFormation.expiration+dataFormation.unite
     axios.post('http://localhost:8081/inscription',{id,name,expiration})
     .then(res => {window.location.reload(true)})
     .catch(err => console.log(err))

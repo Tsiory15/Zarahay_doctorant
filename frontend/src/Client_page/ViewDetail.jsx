@@ -25,7 +25,8 @@ const ViewDetail = () => {
         .catch(err => console.log(err))
     }
     const token = Cookies.get('token')
-    if(!token){
+    const admin = Cookies.get('admin_token')
+    if(!token && !admin){
         return (
             <NoFound/>
         )

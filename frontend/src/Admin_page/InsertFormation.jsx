@@ -5,13 +5,16 @@ import { GrClose } from 'react-icons/gr'
 import Swal from 'sweetalert2'
 import Cookies from 'js-cookie'
 import PagenotFound from '../PagenotFound'
-
+import { FiTrash2 } from "react-icons/fi";
+import { FaEdit } from "react-icons/fa";
 const InsertFormation = () => {
   const [nom, setNom] = useState('')
   const [desc, setDesc] = useState('')
   const [open, setOpen] = useState(false)
-  const [delai,setDelai] = useState('')
-  const [unite,setUnite] = useState('')
+  const [edit, setEdit] = useState(false)
+  const [delai,setDelai] = useState()
+  const [unite,setUnite] = useState('d')
+  const [idFormation,setIdFormation] = useState('')
   const showAlert = (id,idFormation) => {
     Swal.fire({
         title: 'Are you sure?',
@@ -40,9 +43,19 @@ const InsertFormation = () => {
 }
   const add = (e) => {
     e.preventDefault()
-    const expiration = delai+unite
     try {
-      axios.post('http://localhost:8081/Formation', { nom, desc,expiration })
+      axios.post('http://localhost:8081/Formation', { nom, desc,delai,unite })
+        .then(res => {console.log(res)
+        window.location.reload(true)})
+        .catch(err => console.log(err))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const modifier = (e) => {
+    e.preventDefault()
+    try {
+      axios.post('http://localhost:8081/editformation', { nom, desc,delai,unite,idFormation  })
         .then(res => {console.log(res)
         window.location.reload(true)})
         .catch(err => console.log(err))
@@ -95,9 +108,46 @@ const InsertFormation = () => {
           </div>
         </div>
       )}
+      {edit && (
+        <div className='modal_main_container'>
+          <div className='modal_container'>
+            <GrClose className='close' onClick={() => setEdit(false)} />
+            <input
+              type="text"
+              id="nom"
+              placeholder='Nom'
+              value={nom}
+              onChange={e => setNom(e.target.value)}
+            />
+            <div className='expiration'>
+              <input type="number" id="nbr" value={delai} onChange={e => setDelai(e.target.value)}/>
+              <select id="unite" onChange={e => setUnite(e.target.value)}>
+                <option value="d">Jour</option>
+                <option value="h">Heure</option>
+                <option value="m">Minute</option>
+                <option value="s">Seconde</option>
+              </select>
+            </div>
+            <textarea
+              name="desc"
+              id="desc"
+              cols="35"
+              rows="10"
+              placeholder='Description'
+              value={desc}
+              onChange={e => setDesc(e.target.value)}
+            ></textarea>
+            <button className='post' onClick={modifier}>Modifier</button>
+          </div>
+        </div>
+      )}
       <div className='insert_formation_container'>
       <h1>Listes des Formations</h1>
-        <div className='add_formation' onClick={() => setOpen(true)}>Ajouter</div>
+        <div className='add_formation' onClick={() => {
+          setDelai()
+          setDesc('')
+          setNom('')
+          setOpen(true)}}>Ajouter une formation</div>
         <div>
       <table className="table">
                 <thead>
@@ -113,7 +163,13 @@ const InsertFormation = () => {
                             return <tr key={index} className="tbody">
                                 <td>{value.nom_formation}</td>
                                 <td>{value.description_formation}</td>
-                                <td><button onClick={() => showAlert(value.id_formation,value.nom_formation)} className="del">delete</button></td>
+                                <td><button onClick={() => showAlert(value.id_formation,value.nom_formation)} className="del"><FiTrash2/></button>
+                                <button className='edit' onClick={() => {setEdit(true)
+                                  setDelai(value.expiration)
+                                  setIdFormation(value.id_formation) 
+                                  setNom(value.nom_formation)
+                                  setDesc(value.description_formation)}}><FaEdit/></button>
+                                </td>
                             </tr>
                         })
                     }

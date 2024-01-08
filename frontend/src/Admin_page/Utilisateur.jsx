@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import {MoonLoader} from 'react-spinners'
 import Cookies from 'js-cookie';
 import PagenotFound from '../PagenotFound'
-
+import { FiTrash2 } from "react-icons/fi";
 const Utilisateur = () => {
     const [data,setData] = useState([])
     const [load,setLoad] = useState(true)
@@ -71,7 +71,7 @@ const Utilisateur = () => {
                                 <td>{value.nom}</td>
                                 <td>{value.mail}</td>
                                 <td>{value.date_creation.slice(0,10)}</td>
-                                <td><button onClick={() => showAlert(value.id)} className="del">delete</button></td>
+                                <td><button onClick={() => showAlert(value.id)} className="del"><FiTrash2/></button></td>
                             </tr>
                         })
                     }

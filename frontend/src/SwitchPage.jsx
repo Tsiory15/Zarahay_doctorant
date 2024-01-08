@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const SwitchPage = () => {
   const admin = Cookies.get('admin_token')
   const nav = useNavigate()
-  const [change,setChange] = useState(true)
+  const [change,setChange] = useState(false)
   const navigate = () => {
     if(change === true){
       nav('/Utilisateur')

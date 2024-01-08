@@ -22,7 +22,7 @@ thead{
 tbody tr{
     background-color: rgb(255, 255, 255);
 }
-.del{
+.del,.edit,.valid{
     width: 7rem;
     border-radius:3px;
     border: none;

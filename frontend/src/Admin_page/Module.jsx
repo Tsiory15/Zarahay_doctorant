@@ -7,6 +7,7 @@ import ReactPlayer from 'react-player'
 import InsertModule from './InsertModule'
 import Cookies from 'js-cookie'
 import PagenotFound from '../PagenotFound'
+import { FiTrash2 } from "react-icons/fi";
 
 const Module = () => {
     const [load,setLoad] = useState(true)
@@ -56,14 +57,14 @@ const Module = () => {
             {/* <InsertModule/> */}
         <div className="module_page_container">
             <h1>Liste des modules</h1>
-        <div className="inserer_module" onClick={() => setShow(true)}><span>Ajouter</span></div>
+        <div className="inserer_module" onClick={() => setShow(true)}><span>Ajouter une module</span></div>
             <div className="div_module">
             {data_module.map((value,index) => {
                 return <div key={index} className="module_list">
                     <ReactPlayer controls={true} height="300px" width="500px" url={'http://localhost:8081/videos/'+value.videos}/>
                     <p>{value.description_module}</p>
                     {/* <button>View</button> */}
-                    <button onClick={() => onDelete(value.id_module)}>Delete</button>
+                    <button className='del' onClick={() => onDelete(value.id_module)}><FiTrash2/></button>
                     </div>
             })}
             </div>

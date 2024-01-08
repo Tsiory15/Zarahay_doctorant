@@ -2,7 +2,7 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import React, { useEffect, useState } from 'react'
 import PagenotFound from '../PagenotFound'
-
+import { FaCheck } from "react-icons/fa6";
 const Validation = () => {
     const [inscrit,setInscrit] = useState([])
     useEffect(() => {
@@ -41,7 +41,7 @@ const Validation = () => {
                                 <td>{value.nom}</td>
                                 <td>{value.id_formation}</td>
                                 <td>{value.status}</td>
-                                <td><button className='del' onClick={() => Validate(value.id_inscription)}>Valider</button></td>
+                                <td><button className='valid' onClick={() => Validate(value.id_inscription)}><FaCheck/></button></td>
                             </tr>
                         })
                     }

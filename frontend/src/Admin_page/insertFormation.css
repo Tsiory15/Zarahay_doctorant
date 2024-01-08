@@ -22,7 +22,7 @@
     align-items: center;
     justify-content: center;
     padding: 0.5rem;
-    bottom: 50px;
+    top: 40px;
     right: 35px;
     position: fixed;
     background-color: rgb(39, 71, 255);
@@ -73,4 +73,15 @@
     display: flex;
     gap: 1rem;
     justify-content: center;
+}
+.del,.edit,.valid{
+    font-size: 20px;
+    width: fit-content;
+    margin: 0 0.5rem;
+}
+.edit{
+    background-color: rgb(39, 71, 255);
+}
+.valid{
+    background-color: green;
 }

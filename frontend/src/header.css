@@ -163,6 +163,7 @@ font-size: 17px;
         display: inline-block;
         color: white;
         font-size: 30px;
+        margin: 0 0.7rem;
     }
 }
 @keyframes hide {

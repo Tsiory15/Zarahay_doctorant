@@ -35,7 +35,8 @@ CREATE TABLE IF NOT EXISTS formation (
     id_formation INT PRIMARY KEY AUTO_INCREMENT,
     nom_formation TEXT,
     description_formation TEXT,
-    expiration TEXT
+    expiration INT,
+    unite TEXT
 );`;
 const createModule=`
 CREATE TABLE IF NOT EXISTS module (
@@ -319,13 +320,19 @@ app.post('/logadmin',(req,res) => {
 })
 //Insertion de formation 
 app.post('/formation',(req,res) => {
-    const sql = "INSERT INTO formation SET nom_formation = ?,description_formation = ?,expiration = ?";
-    db.query(sql,[req.body.nom,req.body.desc,req.body.expiration],(err,result) => {
+    const sql = "INSERT INTO formation SET nom_formation = ?,description_formation = ?,expiration = ?,unite = ?";
+    db.query(sql,[req.body.nom,req.body.desc,req.body.delai,req.body.unite],(err,result) => {
         if(err)return res.json(err);
         return res.json(result)
     })
 })
-
+app.post('/editformation',(req,res) => {
+    const sql = "UPDATE formation SET nom_formation = ?,description_formation = ?,expiration = ?,unite = ? WHERE id_formation = ?";
+    db.query(sql,[req.body.nom,req.body.desc,req.body.delai,req.body.unite,req.body.idFormation],(err,result) => {
+        if(err)return res.json(err);
+        return res.json(result)
+    })
+})
 
 
 //Code de validation
