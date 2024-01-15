@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import './forgotpass.css'
 import Swal from 'sweetalert2'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 const Forgotpass = () => {
+    const nav = useNavigate()
     const [isEmailFocused,setIsEmailFocused] = useState(false)
     const [mail,setMail] = useState('')
     const [validation,setValidation] = useState('')
@@ -42,9 +44,17 @@ const Forgotpass = () => {
             axios.post('http://localhost:8081/forgotpassword',{mail,validation})
             .then(res => {
                 if(res.status === 201){
-                    
+                    setTimeout(
+                        nav('/ChangePassword'),2000
+                    )
                 }else{
-                    console.log()
+                    Swal.fire({
+                        text:'Non authoriser',
+                        toast:true,
+                        position:'top',
+                        timer:2000,
+                        showConfirmButton:false
+                    })
                 }
             })
         }
@@ -53,6 +63,7 @@ const Forgotpass = () => {
     <div>
         <div className='forgot_main_container'>
             <div className='forgot_form_container'>
+            <p>Récupérez l'accès à votre compte en toute sécurité. Entrez votre adresse e-mail ci-dessous, et nous vous enverrons les instructions nécessaires pour réinitialiser votre mot de passe.</p>
             <div className={`form-group ${isEmailFocused || mail ? 'focused' : ''}`}>
                 <label>Adresse E-mail</label>
                     <input 
@@ -71,7 +82,7 @@ const Forgotpass = () => {
                         onChange={e => setValidation(e.target.value)}/>
                     <button className='validation_btn' onClick={sendValidation}>Envoyer</button>
                 </div>
-                <button onClick={onSubmitHandler} className="create_button">Submit</button>
+                <button onClick={onSubmitHandler} className="create_button">Valider</button>
             </div>
         </div>
     </div>

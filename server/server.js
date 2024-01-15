@@ -372,18 +372,45 @@ app.post('/forgotpassword',(req,res) => {
     db.query(check,[req.body.mail],(err,result) => {
         if(err)return res.json(err);
         if(result.length > 0 && codeValidation === req.body.validation){
+            const mail = result[0].mail
+            const mail_token = jwt.sign({mail},"mail_secret_key",{expiresIn:'30m'});
+            res.cookie('mail_token',mail_token)
             return res.status(201).json(result)
         }else{
             return res.status(202).json(result)
         }
     })
 })
+const getmail = (req,res,next) => {
+    const mail_token = req.cookies.mail_token;
+    if(!mail_token){
+        return res.json({Message:"We need token"})
+    }else{
+        jwt.verify(mail_token,"mail_secret_key",(err,decoded) => {
+            if(err){      
+                return res.json({Message:"Authentication Error"})
+            }else{
+                req.mail = decoded.mail;
+                next();
+            }
+        })
+    }
+}
+app.get('/getmail',getmail,(req,res)=>{
+    return res.json({Status:"Success",mail:req.mail})
+})
 //Réinitialisation de la mot de passe
 app.post('/resetpassword',(req,res) => {
-    const sql = 'UPDATE mdp FROM user WHERE mail = ?'
-    db.query(sql,[req.body.mail],(err,resutl) => {
-        if(err)return res.json(err);
-        return res.json(resutl);
+    const sql = 'UPDATE user SET mdp = ? WHERE mail = ?'
+    bcrypt.hash(req.body.pass,10,(error,hash) => {
+        if(error){
+            console.log(error)
+        }else{
+            db.query(sql,[hash,req.body.mail],(err,result) => {
+                if (err) return res.json(err);
+                return res.json(result);
+            })
+        }
     })
 })
 //Création d'un compte

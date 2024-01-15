@@ -19,6 +19,7 @@ import Voirplus from './Client_page/Voirplus';
 import PagenotFound from './PagenotFound';
 import Forgotpass from './Client_page/Forgotpass';
 import SwitchPage from './SwitchPage';
+import Changepassword from './Client_page/Changepassword';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path='/chat' element={<div><Chat/></div>}></Route>
         <Route path='/pagenotfound' element={<div><PagenotFound/></div>}></Route>
         <Route path='/ForgotPassword' element={<div><Forgotpass/></div>}></Route>
+        <Route path='/ChangePassword' element={<div><Changepassword/></div>}></Route>
         <Route path='/Validation' element={<div><AdminHeader/><Validation/></div>}></Route>
       </Routes>
     </BrowserRouter>

@@ -22,13 +22,14 @@ const Header = () => {
     }
     const handlelogout = () => {
         Swal.fire({
-            title: 'Logout?',
-            text: "You won't be able to revert this!",
+            title: 'Deconnexion',
+            text: "Etes vous sûr de vouloir vous déconnecter",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes'
+            confirmButtonText: 'Oui',
+            cancelButtonText:'Non'
         }).then((result) => {
         if (result.isConfirmed) {
      axios.get('http://localhost:8081/logout')

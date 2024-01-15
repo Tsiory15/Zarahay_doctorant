@@ -3,12 +3,27 @@ import {Link} from 'react-router-dom'
 import "./AdminHeader.css"
 import {LuUserCircle2} from 'react-icons/lu'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const AdminHeader = () => {
     const logout = () => {
-        axios.get('http://localhost:8081/logoutasanadmin')
+        Swal.fire({
+            title: 'Deconnexion',
+            text: "Etes vous sûr de vouloir vous déconnecter",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oui',
+            cancelButtonText:'Non'
+        }).then((result) => {
+        if (result.isConfirmed) {
+     axios.get('http://localhost:8081/logout')
+     axios.get('http://localhost:8081/logoutasanadmin')
         .then(res => window.location.reload(true))
         .catch(err => console.log(err))
+    }}
+        )
     }
     return (
         <div>
