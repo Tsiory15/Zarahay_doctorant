@@ -61,7 +61,8 @@ CREATE TABLE IF NOT EXISTS inscription (
     id_formation TEXT,
     nom TEXT,
     status TEXT,
-    execution_time TIMESTAMP
+    execution_time TIMESTAMP,
+    datefin TIMESTAMP
 );`;
 
 db.query(createAdmin,err => {if(err){console.log(err)}})
@@ -131,9 +132,8 @@ app.post('/inscription',(req,res) => {
     })
 })
 app.get('/getinscrit',(req,res) => {
-    const status = 'non'
-    const sql = "SELECT * FROM inscription WHERE status = ?";
-    db.query(sql,[status],(err,result) => {
+    const sql = "SELECT * FROM inscription";
+    db.query(sql,(err,result) => {
         if(err)res.json(err);
         return res.json(result);
     })
@@ -168,8 +168,10 @@ app.post('/getvalider',(req,res) => {
 //Valider inscription
 app.post('/validate',(req,res) => {
     const status = 'oui'
-    const sql = 'UPDATE inscription SET status = ? WHERE id_inscription = ?'
-    db.query(sql,[status,req.body.id_inscription],(err,result) => {
+    const timestamp = req.body.datefin
+    const futuretimestamp = parseInt(timestamp,10)
+    const sql = 'UPDATE inscription SET status = ? , datefin = ? WHERE id_inscription = ?'
+    db.query(sql,[status,new Date(futuretimestamp),req.body.id_inscription],(err,result) => {
         if(err)res.json(err);
         return res.json(result)
     })

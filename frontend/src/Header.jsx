@@ -18,7 +18,7 @@ const Header = () => {
     const [auth,setAuth] = useState(false)
     const navigate = useNavigate();
     const handleclick = () => {
-        navigate('/login')
+        navigate('/Create')
     }
     const handlelogout = () => {
         Swal.fire({
@@ -72,7 +72,7 @@ const Header = () => {
                         <li className="acceuil"><Link to="/">Acceuil</Link></li>
                         {auth ? <li className="formation"><Link to={"/Formation"}>Formation</Link></li> : <></>}
                         {admin ? <li className="formation"><Link to={"/Formation"}>Formation</Link></li> : <></>}
-                        <li className="contact"><Link>Contact</Link></li>
+                        <li className="contact"><Link to='/Contact'>Contact</Link></li>
                         <li><Link>FAQ</Link></li>
                     </ul>
                 </div>
@@ -87,8 +87,11 @@ const Header = () => {
                             }
                             </>
                             ) : 
-                            (
-                                <button onClick={handleclick} className="log">Se Connecter</button>
+                            (   
+                                <>
+                                <Link to={'/Login'} style={{color:'white',whiteSpace:'nowrap'}}>Se connecter</Link>
+                                <button onClick={handleclick} className="log">S'inscrire</button>
+                                </>
                             )
                         }
                         <FaBars className="menu_icons" onClick={() => setShow(!show)}></FaBars>

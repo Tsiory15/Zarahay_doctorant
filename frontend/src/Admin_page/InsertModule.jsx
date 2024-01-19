@@ -40,6 +40,7 @@ const InsertModule = ({closeModal}) => {
         axios.post('http://localhost:8081/upload',formData)
         .then(res => {
             if(res.data.Status === "Success"){
+                window.location.reload(true)
                 console.log("Success")
             }else{
                 console.log("Failed")

@@ -124,7 +124,7 @@ font-size: 17px;
     }
 } */
 /* Mobile */
-@media (max-width:870px){
+@media (max-width:890px){
     .menu_main_container a{
         color: black;
     }

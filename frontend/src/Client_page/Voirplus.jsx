@@ -7,6 +7,7 @@ import {MoonLoader} from 'react-spinners'
 import Cookies from 'js-cookie'
 import NoFound from '../NoFound'
 
+
 const Voirplus = () => {
   axios.defaults.withCredentials = true;
   const nav = useNavigate()
@@ -54,21 +55,24 @@ const Voirplus = () => {
   //Inscription au cours
   const inscription = () => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Inscription a une formation',
+      text: "Etes vous sur de vouloir s'inscrire a cette formation",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes!'
+      confirmButtonText: 'Oui',
+      cancelButtonText:'Non'
   }).then((result) => {
   if (result.isConfirmed) {
     const expiration = dataFormation.expiration+dataFormation.unite
     axios.post('http://localhost:8081/inscription',{id,name,expiration})
-    .then(res => {window.location.reload(true)})
+    .then(res => {
+      window.location.reload(true)
+    })
     .catch(err => console.log(err))
     Swal.fire(
-      {   text:"Task failed successfully",
+      {   text:"Insription effectué avec succès",
           showConfirmButton:false,
           icon:'success',
       }

@@ -20,6 +20,7 @@ import PagenotFound from './PagenotFound';
 import Forgotpass from './Client_page/Forgotpass';
 import SwitchPage from './SwitchPage';
 import Changepassword from './Client_page/Changepassword';
+import Contact from './Client_page/Contact';
 
 function App() {
   return (
@@ -42,8 +43,12 @@ function App() {
         <Route path='/pagenotfound' element={<div><PagenotFound/></div>}></Route>
         <Route path='/ForgotPassword' element={<div><Forgotpass/></div>}></Route>
         <Route path='/ChangePassword' element={<div><Changepassword/></div>}></Route>
+        <Route path='/Contact' element={<div><Contact/></div>}></Route>
         <Route path='/Validation' element={<div><AdminHeader/><Validation/></div>}></Route>
       </Routes>
+      {/* <footer>
+        <p>&copy; Copyright CIDST 2023</p>
+    </footer> */}
     </BrowserRouter>
   );
 }
