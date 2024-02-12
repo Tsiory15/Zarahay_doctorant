@@ -33,8 +33,8 @@ const Validation = () => {
                     <tr className="thead">
                         <th>Nom</th>
                         <th>Formation</th>
+                        <th>Date de fin de formation</th>
                         <th>Status</th>
-                        <th>date de fin de formation</th>
                         <th>Action</th>
                     </tr>
                 </thead>
